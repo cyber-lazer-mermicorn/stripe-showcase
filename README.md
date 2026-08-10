@@ -1,5 +1,5 @@
 # Stripe Commerce Engine
-## Built by Cherry Barton | AI Solutions Engineer
+## Built by Cherry Shanaley (Chan) | AI Solutions Engineer
 
 Full-stack commerce with Stripe: Checkout, Billing, Connect, and Revenue Recognition.
 
@@ -132,6 +132,6 @@ I've integrated Stripe in Commerce AI and other platforms. This repo showcases:
 
 ## Contact
 
-**Cherry Barton** — cherry@lazermermicorn.com
+**Cherry Shanaley (Chan)** — cyber.lazer.mermicorn@gmail.com
 
 *AI Solutions Engineer | 9 Production Platforms | Stripe Integration Expert*
