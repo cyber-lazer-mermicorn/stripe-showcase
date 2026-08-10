@@ -1,7 +1,7 @@
 # Stripe Commerce Engine
 ## Built by Cherry Barton | AI Solutions Engineer
 
-Full-stack commerce with Stripe: Subscriptions, Checkout, and Webhooks.
+Full-stack commerce with Stripe: Checkout, Billing, Connect, and Revenue Recognition.
 
 **Live:** https://stripe-showcase.lazermermicorn.com
 
@@ -13,28 +13,32 @@ Full-stack commerce with Stripe: Subscriptions, Checkout, and Webhooks.
 - One-time payments
 - Subscriptions
 - Payment links
+- Mobile-optimized
 
 ### Stripe Billing
 - Subscription management
 - Usage-based billing
 - Invoice generation
-
-### Stripe Webhooks
-- Event handling
-- Idempotency
-- Error recovery
+- Customer portal
 
 ### Stripe Connect
 - Marketplace payments
 - Split payments
 - Payouts
+- Onboarding
+
+### Stripe Revenue Recognition
+- Revenue schedules
+- Deferred revenue
+- ASC 606 compliance
+- Financial reporting
 
 ---
 
 ## Tech Stack
 
-- **Framework:** Next.js 14
-- **Payments:** Stripe
+- **Framework:** Next.js 15
+- **Payments:** Stripe (latest)
 - **Database:** Supabase
 - **Deployment:** Vercel
 
@@ -64,14 +68,14 @@ One-time payment checkout with Stripe.
 ### 2. Subscription Management
 Recurring billing with multiple tiers.
 
-### 3. Webhook Handling
-Secure webhook processing with signature verification.
+### 3. Usage-Based Billing
+Pay-as-you-go pricing models.
 
 ### 4. Customer Portal
 Self-service subscription management.
 
-### 5. Invoice Generation
-Automatic invoice creation and delivery.
+### 5. Revenue Recognition
+ASC 606 compliant revenue schedules.
 
 ---
 
@@ -90,21 +94,26 @@ const session = await stripe.checkout.sessions.create({
   cancel_url: 'https://example.com/cancel',
 });
 
-// Webhook Handler
-app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  const event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
-  
-  switch (event.type) {
-    case 'checkout.session.completed':
-      // Handle successful payment
-      break;
-    case 'invoice.paid':
-      // Handle invoice payment
-      break;
+// Usage-Based Billing
+await stripe.subscriptionItems.createUsageRecord(
+  'si_1234',
+  {
+    quantity: 100,
+    timestamp: Math.floor(Date.now() / 1000),
+    action: 'increment',
   }
-  
-  res.json({received: true});
+);
+
+// Revenue Recognition
+const schedule = await stripe.revenueScheduleSchedules.create({
+  name: 'Annual Subscription',
+  revenue_schedule_items: [{
+    amount: 120000,
+    currency: 'usd',
+    revenue_recognition_rule: 'recognized_ratably',
+    start: Math.floor(Date.now() / 1000),
+    end: Math.floor(Date.now() / 1000) + 31536000,
+  }],
 });
 ```
 
@@ -116,8 +125,8 @@ I've integrated Stripe in Commerce AI and other platforms. This repo showcases:
 
 - **Checkout** for one-time payments
 - **Billing** for subscriptions
-- **Webhooks** for event handling
 - **Connect** for marketplace payments
+- **Revenue Recognition** for financial compliance
 
 ---
 
